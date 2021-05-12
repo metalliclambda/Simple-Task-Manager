@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/mine.css" rel="stylesheet">
+    <title>Task Test</title>
+</head>
+<body>
+    <div>
+        <h1>Task Manager with Express and EJS</h1>
+        <form action="/new-task" method="POST" autocomplete="off">
+            <div class="mb-3">
+              <input type="text" class="form-control" name="newTask" aria-describedby="emailHelp" required>              
+            </div>                        
+            <button type="submit" class="btn btn-primary">Add New Task</button>
+        </form>
+    </div>    
+    <br>
+    <h4>Task List :</h4>
+    <% if (tasks.length === 0) { %>
+        <h4>Empty List</h4>
+    <%} %>
+    <div class="tasks-list">        
+        <ul class="list-group">
+            <% for(var i=0 ; i<tasks.length ; i++){ %>
+            <li class="list-group-item items-in-list">
+                <div class="side-by-side">
+                    <h6><%= tasks[i].taskText %></h6>
+                </div>
+                <div class="side-by-side">
+                    <button name="<%= i %>" onclick="updateFunction(event)" class="btn btn-secondary btn-sm">Edit</button>
+                </div>
+                <div class="side-by-side">
+                    <form action="/delete" method="POST">
+                        <button id="delete-btn" onclick="return deleteFunction()" name="id" value="<%= tasks[i]._id %>" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+
+            </li>
+            <div id="<%= 'task-update-area-' + i  %>"  class="task-update-area" hidden>
+                <form action="/update-task" method="POST" autocomplete="off">
+                    <input type="hidden" name="id" value="<%= tasks[i]._id  %>">
+                    <input class="form-control" value="<%= tasks[i].taskText  %>" name="newText" type="text" aria-label="default input example" required>                    
+                    <button type="submit" class="btn btn-danger btn-sm items-in-list">Update The Task</button>
+                </form>
+            </div>
+            
+            <% } %>
+            
+        </ul>
+      
+            
+    </div>
+    
+    
+    <!-- <script src="./js/jquery-3.6.0.min.js"></script> -->
+    <script src="./css/bootstrap.bundle.min.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

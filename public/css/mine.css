@@ -1,0 +1,23 @@
+body {
+    padding: 1%;
+}
+
+.custom-btn {
+    width: 5%;
+}
+
+.side-by-side {
+    display: inline-block;
+}
+
+.items-in-list {
+    margin: 1%;
+}
+
+.update-task-input {
+    
+}
+
+.task-update-area {
+    padding-left: 1%;
+}
